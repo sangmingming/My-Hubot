@@ -15,16 +15,17 @@ module.exports = (robot) ->
 			if data.category.length == 0
 				msg.send ":joy: 今天休息没干货"
 				return
-			categories = data.category
+			datas = data.results
 			title = "今日干货 #{year}年#{month}月#{day}日"
-			content = ""
-			for category of categories
-				if category isnt "休息视频" and categories isnt "福利"
-					datacontents = data.results[category]
-					content = content + "**" +category + "**    "
-					for item of datacontents
-						content = content + item.desc + " " + item.url + "     "
-			attachments = [{text:content, color:"#409fff"}]
+			arr = new Array()
+			for key, contents of datas
+				if key isnt "休息视频" and key isnt "福利"
+					itemString = "**" +key + "**    "
+					for item of contents
+						itemString = itemString + item.desc + " " + item.url + "     "
+					arr.push itemString
+					console.log(itemString)
+			attachments = [{text:arr.join("    "), color:"#409fff"}]
 			msg.send title,attachments
 
 	robot.hear /今日干货/i, (res) ->
