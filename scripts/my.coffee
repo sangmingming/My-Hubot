@@ -12,12 +12,23 @@ module.exports = (robot) ->
 				msg.send ":sob: 发生了错误，我不知道该怎么办了"
 				return
 			data = JSON.parse body
-			if data.length == 0
+			if data.category.length == 0
 				msg.send ":joy: 今天休息没干货"
 				return
-			msg.send "今日干货 #{year}年#{month}月#{day}日" 
+			categories = data.category
+			title = "今日干货 #{year}年#{month}月#{day}日"
+			content = ""
+			for category of categories
+				if category isnt "休息视频" and categories isnt "福利"
+					datacontents = data.results[category]
+					content = content + "**" +category + "**    "
+					for item of datacontents
+						content = content + item.desc + " " + item.url + "     "
+			attachments = [{text:content, color:"#409fff"}]
+			msg.send title,attachments
 
-	 	
+	robot.hear /今日干货/i, (res) ->
+		sendTodayGank res
 
 	robot.hear /hi/i, (res) ->
 		res.send "How are you?"
