@@ -21,7 +21,7 @@ module.exports = (robot) ->
 			for key, contents of datas
 				if key isnt "休息视频" and key isnt "福利"
 					itemString = "**" +key + "**    "
-					for item of contents
+					for i,item of contents
 						itemString = itemString + item.desc + " " + item.url + "     "
 					arr.push itemString
 					console.log(itemString)
