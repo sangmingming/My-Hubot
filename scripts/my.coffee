@@ -1,10 +1,10 @@
 module.exports = (robot) ->
 	
 	sendTodayGank = (msg) ->
-		date = new Date
-		year = date.getFullYear
-		month = date.getMonth + 1
-		day = date.getDate
+		date = new Date()
+		year = date.getFullYear()
+		month = date.getMonth() + 1
+		day = date.getDate()
 		url = "http://gank.io/api/day/#{year}/#{month}/#{day}"
 		console.log(url)
 		msg.http(url).get() (err, res, body) ->
