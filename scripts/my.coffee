@@ -4,7 +4,7 @@ module.exports = (robot) ->
 		date = new Date()
 		year = date.getFullYear()
 		month = date.getMonth() + 1
-		day = date.getDate() - 3
+		day = date.getDate()
 		url = "http://gank.io/api/day/#{year}/#{month}/#{day}"
 		console.log(url)
 		msg.http(url).get() (err, res, body) ->
@@ -22,7 +22,7 @@ module.exports = (robot) ->
 				if key isnt "休息视频" and key isnt "福利"
 					attachmentItem = {title:key, text:"", color: "#409fff"}
 					for i,item of contents
-						attachmentItem.text = attachmentItem.text + item.desc + "\n" + item.url + "     "
+						attachmentItem.text = attachmentItem.text + item.desc + " By:" + item.who + "\n" + item.url + "\n"
 					arr.push attachmentItem
 			msg.send title,arr
 	
