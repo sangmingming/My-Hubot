@@ -24,7 +24,6 @@ module.exports = (robot) ->
 					for i,item of contents
 						attachmentItem.text = attachmentItem.text + item.desc + "\n" + item.url + "     "
 					arr.push attachmentItem
-					console.log(itemString)
 			msg.send title,arr
 	
 	sendItem = (msg, jsonResult) ->
