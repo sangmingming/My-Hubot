@@ -39,7 +39,7 @@ module.exports = (robot) ->
 			if item.type is "福利"
 				attachments = [{text:"By: #{item.who} AT: #{item.publishedAt}", color:"#FF2741", images: [{url: item.url}]}]
 			else
-				attachments = [{title: item.url, text:"By: #{item.who} AT: #{item.publishedAt}", color:"#8dd941"}]
+				attachments = [{title: item.type, text:item.url, color:"#8dd941"}]
 			msg.send title, attachments	
 
 	robot.hear /今日干货/i, (res) ->
