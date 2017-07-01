@@ -1,0 +1,27 @@
+; Hubot systemd service unit file
+; Place in e.g. `/etc/systemd/system/hubot.service`, then `systemctl daemon-reload` and `service hubot start`.
+
+[Unit]
+Description=Hubot
+Requires=network.target
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/var/data/MyHubot/
+User=root
+
+Restart=always
+RestartSec=10
+
+; Configure Hubot environment variables, use quotes around vars with whitespace as shown below.
+Environment="HUBOT_BEARYCHAT_TOKENS=704347a0c5ffd9ce2fb3d561403bd2b0"
+;Environment="HUBOT_bbb='yyy yyy'"
+
+; Alternatively multiple environment variables can loaded from an external file
+;EnvironmentFile=/etc/hubot-environment
+
+ExecStart=/var/data/MyHubot/bin/hubot -a bearychat
+
+[Install]
+WantedBy=multi-user.target
